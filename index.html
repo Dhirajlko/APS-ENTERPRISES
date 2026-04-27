@@ -2,31 +2,798 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>APS ENTERPRISES</title>
-<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>APS ENTERPRISES | Solar Energy Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0f1a;
+    color: #ffffff;
+    overflow-x: hidden;
+  }
+
+  /* Animated Gradient Background */
+  .animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: linear-gradient(125deg, #0a0f1a 0%, #0d1b2a 30%, #1b2d45 60%, #0a0f1a 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 12s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Floating Sun Particles */
+  .sun-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .particle {
+    position: absolute;
+    background: radial-gradient(circle, rgba(255, 200, 50, 0.6), transparent);
+    border-radius: 50%;
+    animation: floatParticle 15s infinite linear;
+  }
+
+  @keyframes floatParticle {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.8;
+    }
+    90% {
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(-100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  /* Top Bar */
+  .topbar {
+    background: rgba(10, 15, 26, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 200, 50, 0.3);
+    padding: 12px 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 0.85rem;
+    position: relative;
+    z-index: 100;
+  }
+
+  .topbar-left, .topbar-right {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .topbar span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #ccd6f0;
+    transition: 0.3s;
+  }
+
+  .topbar span i {
+    color: #ffc832;
+  }
+
+  .topbar span:hover {
+    color: #ffc832;
+    transform: translateY(-2px);
+  }
+
+  /* Header */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background: rgba(10, 15, 26, 0.7);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 200, 50, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    transition: 0.3s;
+  }
+
+  .logo h1 {
+    font-size: 1.9rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff, #ffc832, #ffaa00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+  }
+
+  .logo p {
+    font-size: 0.8rem;
+    color: #ffc832;
+    letter-spacing: 2px;
+  }
+
+  nav {
+    display: flex;
+    gap: 35px;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: #e0e7ff;
+    font-weight: 500;
+    transition: 0.3s;
+    position: relative;
+  }
+
+  nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -6px;
+    left: 0;
+    background: linear-gradient(90deg, #ffc832, #ff9500);
+    transition: 0.4s;
+  }
+
+  nav a:hover::after {
+    width: 100%;
+  }
+
+  nav a:hover {
+    color: #ffc832;
+    text-shadow: 0 0 8px rgba(255, 200, 50, 0.4);
+  }
+
+  /* Hero Section */
+  .hero {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 40px 20px;
+  }
+
+  .hero h2 {
+    font-size: 4rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff, #ffc832, #ffaa44);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shine 3s linear infinite;
+    margin-bottom: 20px;
+  }
+
+  @keyframes shine {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+
+  .hero .subhead {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    color: #b9c7d9;
+    max-width: 600px;
+  }
+
+  .glow-btn {
+    background: linear-gradient(45deg, #ffc832, #ff9500);
+    border: none;
+    padding: 16px 48px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 60px;
+    cursor: pointer;
+    transition: all 0.4s;
+    box-shadow: 0 0 20px rgba(255, 200, 50, 0.5);
+    font-family: inherit;
+    color: #0a0f1a;
+  }
+
+  .glow-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 40px rgba(255, 200, 50, 0.9);
+    letter-spacing: 1px;
+  }
+
+  /* Stats Section */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+    padding: 60px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    margin: 20px 40px;
+    border-radius: 60px;
+    border: 1px solid rgba(255, 200, 50, 0.2);
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #ffc832;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: #b9c7d9;
+    margin-top: 8px;
+  }
+
+  /* Services Section */
+  .services {
+    padding: 80px 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .section-title span {
+    color: #ffc832;
+    border-bottom: 3px solid #ffc832;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: #b9c7d9;
+    margin-bottom: 60px;
+    font-size: 1.1rem;
+  }
+
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  .service-card {
+    background: rgba(20, 30, 45, 0.7);
+    backdrop-filter: blur(12px);
+    border-radius: 32px;
+    padding: 40px 30px;
+    width: 280px;
+    text-align: center;
+    border: 1px solid rgba(255, 200, 50, 0.2);
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    cursor: pointer;
+  }
+
+  .service-card:hover {
+    transform: translateY(-15px);
+    border-color: #ffc832;
+    box-shadow: 0 25px 45px -12px rgba(255, 200, 50, 0.3);
+    background: rgba(30, 45, 65, 0.9);
+  }
+
+  .service-card i {
+    font-size: 3.5rem;
+    color: #ffc832;
+    margin-bottom: 25px;
+  }
+
+  .service-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+  }
+
+  .service-card p {
+    color: #b9c7d9;
+    line-height: 1.5;
+  }
+
+  /* Why Choose Us */
+  .why-us {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(10, 20, 35, 0.8));
+    padding: 80px 40px;
+    margin: 40px 0;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .feature {
+    text-align: center;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    transition: 0.3s;
+  }
+
+  .feature:hover {
+    background: rgba(255, 200, 50, 0.1);
+    transform: scale(1.02);
+  }
+
+  .feature i {
+    font-size: 2.5rem;
+    color: #ffc832;
+    margin-bottom: 20px;
+  }
+
+  .feature h4 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  /* Contact Section */
+  .contact {
+    padding: 80px 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+    background: rgba(20, 30, 45, 0.6);
+    backdrop-filter: blur(12px);
+    border-radius: 48px;
+    padding: 50px;
+    border: 1px solid rgba(255, 200, 50, 0.2);
+  }
+
+  .contact-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .contact-info p {
+    margin-bottom: 30px;
+    color: #b9c7d9;
+  }
+
+  .contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .contact-detail i {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 200, 50, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffc832;
+    font-size: 1.2rem;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group input, .form-group textarea {
+    width: 100%;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 200, 50, 0.3);
+    border-radius: 30px;
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: 0.3s;
+  }
+
+  .form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: #ffc832;
+    box-shadow: 0 0 15px rgba(255, 200, 50, 0.3);
+  }
+
+  .form-group textarea {
+    border-radius: 24px;
+    resize: vertical;
+  }
+
+  .submit-btn {
+    background: linear-gradient(45deg, #ffc832, #ff9500);
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .submit-btn:hover {
+    transform: scale(0.98);
+    box-shadow: 0 0 20px rgba(255, 200, 50, 0.5);
+  }
+
+  /* WhatsApp Float */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #25D366;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: white;
+    text-decoration: none;
+    z-index: 1000;
+    animation: pulse 2s infinite;
+    box-shadow: 0 0 25px #25D36688;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  /* Footer */
+  footer {
+    background: #050a12;
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid rgba(255, 200, 50, 0.2);
+  }
+
+  footer p {
+    color: #8892b0;
+  }
+
+  /* Responsive */
+  @media (max-width: 850px) {
+    header {
+      flex-direction: column;
+      gap: 15px;
+      padding: 16px 20px;
+    }
+    nav {
+      gap: 25px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .hero h2 {
+      font-size: 2.5rem;
+    }
+    .contact-container {
+      grid-template-columns: 1fr;
+      padding: 30px;
+    }
+    .stats {
+      margin: 20px;
+      gap: 30px;
+    }
+    .services, .contact, .why-us {
+      padding: 50px 20px;
+    }
+  }
+
+  @media (max-width: 550px) {
+    .topbar {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .topbar-left, .topbar-right {
+      justify-content: center;
+    }
+    .hero h2 {
+      font-size: 1.8rem;
+    }
+    .stat-number {
+      font-size: 2rem;
+    }
+  }
+</style>
 </head>
 <body>
 
+<div class="animated-bg"></div>
+<div class="sun-particles" id="particles"></div>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <span><i class="fas fa-phone-alt"></i> +91 98765 43210</span>
+    <span><i class="fas fa-envelope"></i> contact@apsenterprises.com</span>
+  </div>
+  <div class="topbar-right">
+    <span><i class="fas fa-map-marker-alt"></i> Lucknow | Kanpur | Delhi NCR</span>
+    <span><i class="far fa-clock"></i> Mon-Sat: 9AM - 7PM</span>
+  </div>
+</div>
+
 <header>
-  <h1>APS ENTERPRISES</h1>
-  <p>Solar | Inverter | Batteries</p>
+  <div class="logo">
+    <h1>APS ENTERPRISES</h1>
+    <p>⚡ POWERING TOMORROW</p>
+  </div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#whyus">Why Us</a>
+    <a href="#contact">Contact</a>
+  </nav>
 </header>
 
-<section class="hero">
+<section id="home" class="hero">
   <h2>Power Your Life with Solar Energy ⚡</h2>
-  <a href="contact.html" class="btn">Get Quote</a>
+  <div class="subhead">Sustainable | Reliable | Affordable Solar & Inverter Solutions</div>
+  <button class="glow-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">✨ Get Free Quote ✨</button>
 </section>
 
-<section class="features">
-  <div>Solar Installation</div>
-  <div>Inverter Solutions</div>
-  <div>Battery Backup</div>
+<div class="stats">
+  <div class="stat-item">
+    <div class="stat-number">500+</div>
+    <div class="stat-label">Happy Clients</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">2.5MW+</div>
+    <div class="stat-label">Solar Installed</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">24/7</div>
+    <div class="stat-label">Support Available</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">10+</div>
+    <div class="stat-label">Years Experience</div>
+  </div>
+</div>
+
+<section id="services" class="services">
+  <h2 class="section-title">Our <span>Premium Services</span></h2>
+  <div class="section-subtitle">Complete energy solutions for homes, businesses & industries</div>
+  <div class="cards">
+    <div class="service-card">
+      <i class="fas fa-solar-panel"></i>
+      <h3>Solar Installation</h3>
+      <p>On-grid, off-grid & hybrid solar systems with maximum efficiency</p>
+    </div>
+    <div class="service-card">
+      <i class="fas fa-microchip"></i>
+      <h3>Inverter Solutions</h3>
+      <p>Pure sine wave, solar inverters & smart hybrid models</p>
+    </div>
+    <div class="service-card">
+      <i class="fas fa-car-battery"></i>
+      <h3>Battery Backup</h3>
+      <p>Lithium-ion & tubular batteries with long backup life</p>
+    </div>
+    <div class="service-card">
+      <i class="fas fa-charging-station"></i>
+      <h3>EV Charging</h3>
+      <p>Electric vehicle charging stations for homes & commercial</p>
+    </div>
+  </div>
 </section>
+
+<section id="whyus" class="why-us">
+  <h2 class="section-title">Why <span>Choose APS?</span></h2>
+  <div class="section-subtitle">We don't just install — we empower</div>
+  <div class="features-grid">
+    <div class="feature">
+      <i class="fas fa-certificate"></i>
+      <h4>Certified Experts</h4>
+      <p>MNRE approved & ISO certified installations</p>
+    </div>
+    <div class="feature">
+      <i class="fas fa-tools"></i>
+      <h4>Free Maintenance</h4>
+      <p>5 years comprehensive warranty on all systems</p>
+    </div>
+    <div class="feature">
+      <i class="fas fa-chart-line"></i>
+      <h4>Save 80% Bill</h4>
+      <p>Typical ROI within 3-4 years on solar investment</p>
+    </div>
+    <div class="feature">
+      <i class="fas fa-headset"></i>
+      <h4>24/7 Support</h4>
+      <p>Emergency service & remote monitoring</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <h2 class="section-title">Get <span>In Touch</span></h2>
+  <div class="section-subtitle">Let's discuss your energy needs — free consultation</div>
+  <div class="contact-container">
+    <div class="contact-info">
+      <h3>Let's Connect</h3>
+      <p>Our solar experts will help you choose the perfect solution tailored to your needs.</p>
+      <div class="contact-detail">
+        <i class="fas fa-phone-alt"></i>
+        <span>+91 98765 43210</span>
+      </div>
+      <div class="contact-detail">
+        <i class="fas fa-envelope"></i>
+        <span>contact@apsenterprises.com</span>
+      </div>
+      <div class="contact-detail">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Lucknow | Kanpur | Delhi NCR</span>
+      </div>
+      <div class="contact-detail">
+        <i class="fab fa-whatsapp"></i>
+        <span>+91 90664 17285 (WhatsApp)</span>
+      </div>
+    </div>
+    <form id="contactForm">
+      <div class="form-group">
+        <input type="text" id="name" placeholder="Full Name *" required>
+      </div>
+      <div class="form-group">
+        <input type="tel" id="mobile" placeholder="Mobile Number *" required>
+      </div>
+      <div class="form-group">
+        <input type="email" id="email" placeholder="Email Address">
+      </div>
+      <div class="form-group">
+        <textarea rows="3" id="message" placeholder="Tell us about your requirement (rooftop area, budget, etc.)"></textarea>
+      </div>
+      <button type="submit" class="submit-btn"><i class="fas fa-sun"></i> Get Free Quote</button>
+    </form>
+  </div>
+</section>
+
+<a href="https://wa.me/919066417285" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+  <i class="fab fa-whatsapp"></i>
+</a>
 
 <footer>
-  <p>© 2026 APS ENTERPRISES</p>
+  <p>© 2026 APS ENTERPRISES — Empowering India with Solar Energy</p>
+  <p style="margin-top: 10px; font-size: 0.8rem;">🌞 Switch to Solar | Save Money | Save Planet</p>
 </footer>
+
+<script>
+  // Create floating particles (sun-like)
+  function createParticles() {
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 60; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      const size = Math.random() * 8 + 3;
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDuration = Math.random() * 12 + 8 + 's';
+      particle.style.animationDelay = Math.random() * 10 + 's';
+      particle.style.opacity = Math.random() * 0.5 + 0.2;
+      container.appendChild(particle);
+    }
+  }
+  createParticles();
+
+  // Smooth scroll for navigation
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === "#" || targetId === "") return;
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Form submission with validation
+  const form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const mobile = document.getElementById('mobile').value.trim();
+      
+      if (!name || !mobile) {
+        alert("⚠️ Please enter your name and mobile number to get a free quote!");
+        return;
+      }
+      
+      if (mobile.length < 10 || isNaN(Number(mobile))) {
+        alert("📱 Please enter a valid 10-digit mobile number.");
+        return;
+      }
+      
+      alert(`✅ Thank you ${name}! Our solar expert will call you within 1 hour on ${mobile}. Let's power your future with solar energy! 🌞`);
+      form.reset();
+    });
+  }
+
+  // Counter animation for stats
+  const counters = document.querySelectorAll('.stat-number');
+  const speed = 200;
+  
+  const animateCounters = () => {
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = parseInt(counter.innerText);
+        const current = parseInt(counter.innerText);
+        const increment = target / speed;
+        if (current < target) {
+          counter.innerText = Math.ceil(current + increment);
+          setTimeout(updateCount, 30);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      updateCount();
+    });
+  };
+  
+  // Trigger counter when stats come into view
+  const observerOptions = { threshold: 0.5 };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounters();
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+  
+  const statsSection = document.querySelector('.stats');
+  if (statsSection) observer.observe(statsSection);
+</script>
 
 </body>
 </html>
